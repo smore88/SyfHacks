@@ -38,7 +38,8 @@ export default class AddApplicant extends Component {
       phone_loc_lat: null,
       phone_loc_long: null,
       mileage: null,
-      submitted: false
+      submitted: false,
+      showNewIphone: false
     };
   }
 
@@ -89,6 +90,7 @@ export default class AddApplicant extends Component {
       mileage: e.target.value
     })
   }
+
 
   /////////// SAVE THE APPLICANT TO THE DB ////////////////////
   saveApplicant() {
@@ -144,6 +146,21 @@ export default class AddApplicant extends Component {
     }
   }
 
+  handleButtonClick = () => {
+    this.saveApplicant();
+    const { payment_num } = this.state;
+    if (payment_num > 500) {
+      this.setState({
+        showNewIphone: true,
+      });
+    } else {
+      this.setState({
+        showNewIphone: false,
+      });
+    }
+    
+  };
+
   newApplicant() {
     this.setState({
       id: null,
@@ -152,7 +169,8 @@ export default class AddApplicant extends Component {
       payment_num: "",
       card_loc_lat: "",
       card_loc_long: "",
-      submitted: false
+      submitted: false,
+      showNewIphone: false
     });
   }
 
@@ -164,11 +182,12 @@ export default class AddApplicant extends Component {
           </IphoneLayout> */
 
   render() {
+    const { payment_num, showNewIphone } = this.state;
     return (
       // className="submit-form"
       <div>
         <CenteredWrapper>
-          <NewIphone></NewIphone>
+          {showNewIphone && <NewIphone></NewIphone>}
           <StyledCustomerCard>
             <h4>Customer Payment Info</h4>
             <div className="form-group">
@@ -238,7 +257,7 @@ export default class AddApplicant extends Component {
                   name="card_loc_long"
                 />
               </div>
-              <Button onClick={this.saveApplicant} className="btn btn-success">
+              <Button onClick={this.handleButtonClick} className="btn btn-success">
                 Submit
               </Button>
             </div>
