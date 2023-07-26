@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@mantine/core";
-import { IphoneLayout, ButtonHolder } from './StyledComponents';
+import { IphoneLayout, ButtonHolder, LocationText } from './StyledComponents';
 import { useState } from 'react';
 
 const NewIphone = ({ location }) => {
@@ -14,7 +14,8 @@ const NewIphone = ({ location }) => {
   return (
       <IphoneLayout>
         <img src="./phoneCover.png" className="iphone"></img>
-        <p>{location}</p>
+
+        <LocationText>{location}</LocationText>
         <ButtonHolder>
           <button className="transparent-button">
             <img src="./greenX.png" alt="Green X" className="transparent-image" />

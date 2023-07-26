@@ -19,12 +19,24 @@ export const ButtonHolder = styled('div')`
   margin-top: -250px;
   margin-left: 90px;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: center;
+  gap: 64px;
+  
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 12px;
+  padding-top: 2rem;
+  margin-bottom: 0px;
   margin-right: 100px;
 `;
 
 export const IphoneLayout = styled('div')`
   height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items:center;
 `;
 
 export const StyledCustomerCard = styled('div')`
@@ -47,5 +59,14 @@ export const CardInfoTextField = styled(TextField)`
 	border-width: 2px; /* Set the border width to bold */
 `;
 
-
+export const LocationText = styled('p')`
+  position: absolute;
+  padding-top: 20.5rem;
+  padding-right: 6.75rem;
+  font-size: 11px;
+  color: grey;
+  font-family: Open Sans, Sans-Serif;
+  font-style: normal;
+  
+`
 

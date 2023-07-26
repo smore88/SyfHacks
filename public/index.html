@@ -15,6 +15,76 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" defer></script>
+        <script>
+          function isInDesiredForm(str) {
+	return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
+function remove_excess(comps) {
+	for (var i = 0; i < comps.length; i++) {
+		var tokens = comps[i].split(" ");
+		var behind = 0;
+		for (var j = 0; j < tokens.length - behind; j++) {
+			if (tokens[j].includes("+")) {
+				tokens.splice(j, 1);
+				behind += 1;
+			}
+			
+		}
+
+		behind = 0;
+		for (var j = 0; j < tokens.length - behind; j++) {
+			console.log(typeof(tokens[j]))
+			if (tokens[j].length == 5 && isInDesiredForm(tokens[j])) {
+				tokens.splice(j, 1);
+				behind += 1;
+			}
+		}
+
+		if (tokens.length == 0) comps.splice(i, 1)
+		else comps[i] = tokens.join(" ");
+	}
+	return comps;
+};
+
+function reverse_geocode() {
+	const geocoder = new google.maps.Geocoder();
+	const input = document.getElementById("latlng").value;
+	const latlngStr = input.split(",", 2);
+	const latlng = {
+		lat: parseFloat(latlngStr[0]),
+		lng: parseFloat(latlngStr[1]),
+	};
+	geocoder.geocode({location: latlng})
+	.then((response) => {
+		if (response.results[0]) {
+			addr = response.results[0].formatted_address;
+			console.log(addr)
+			comps = remove_excess(addr.split(", "));
+			console.log(comps)
+			if (comps.length == 0) document.getElementById("formatted_address").innerHTML = "an undisclosed location";
+			else if (comps.length == 1) document.getElementById("formatted_address").innerHTML = comps[0];
+			else if (comps[comps.length - 1] == "USA") {
+				document.getElementById("formatted_address").innerHTML = comps[comps.length - 3] + ", " + comps[comps.length - 2].substr(0, 2);
+			} else {
+				if (comps.length >= 3) {
+					document.getElementById("formatted_address").innerHTML = comps[comps.length - 3] + ", " + comps[comps.length - 2] + ", " + comps[comps.length - 1];
+				} else document.getElementById("formatted_address").innerHTML = comps[comps.length - 2] + ", " + comps[comps.length - 1];
+			}
+			
+		} else {
+			document.getElementById("formatted_address").innerHTML = "sorry";
+		}
+	});
+	
+};
+        </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
