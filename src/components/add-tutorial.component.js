@@ -39,7 +39,8 @@ export default class AddApplicant extends Component {
       phone_loc_long: null,
       mileage: null,
       submitted: false,
-      showNewIphone: false
+      showNewIphone: false,
+      location: ""
     };
   }
 
@@ -148,6 +149,9 @@ export default class AddApplicant extends Component {
 
   handleButtonClick = () => {
     this.saveApplicant();
+    // get harsh function response and set the location as a string and then
+    // 2 coords will be card_loc_lat, card_loc_long pass this as inputs to ur functions, save it
+    // string str = this.location; something like this to pass ur string that u return to the location state
     const { payment_num } = this.state;
     if (payment_num > 500) {
       this.setState({
@@ -158,7 +162,7 @@ export default class AddApplicant extends Component {
         showNewIphone: false,
       });
     }
-    
+
   };
 
   newApplicant() {
@@ -170,7 +174,8 @@ export default class AddApplicant extends Component {
       card_loc_lat: "",
       card_loc_long: "",
       submitted: false,
-      showNewIphone: false
+      showNewIphone: false,
+      location: ""
     });
   }
 
@@ -182,12 +187,12 @@ export default class AddApplicant extends Component {
           </IphoneLayout> */
 
   render() {
-    const { payment_num, showNewIphone } = this.state;
+    const { payment_num, showNewIphone, location } = this.state;
     return (
       // className="submit-form"
       <div>
         <CenteredWrapper>
-          {showNewIphone && <NewIphone></NewIphone>}
+          {showNewIphone && <NewIphone location={location}></NewIphone>}
           <StyledCustomerCard>
             <h4>Customer Payment Info</h4>
             <div className="form-group">
