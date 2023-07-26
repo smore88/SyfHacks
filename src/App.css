@@ -46,3 +46,16 @@ body, html {
   left: 38.5%;
   /* transform: translateX(-50%); */
 }
+
+.transparent-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Add a smooth transition effect */
+}
+
+.transparent-button:hover {
+  background-color: lightgray; /* The hover background color you want */
+}

@@ -15,6 +15,14 @@ export const CenteredWrapper = styled('div')`
   display: flex;
 `;
 
+export const ButtonHolder = styled('div')`
+  margin-top: -250px;
+  margin-left: 90px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 100px;
+`;
+
 export const IphoneLayout = styled('div')`
   height: 85vh;
 `;
