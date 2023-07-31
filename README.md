@@ -8,7 +8,6 @@
 * nodejs server     backend server
 * ReactJS           front end
 
-* relook at this: https://www.bezkoder.com/react-node-express-mysql/  
 
 [DOCKER]
 * I am trying to use docker to host mysql as a container
